@@ -15,10 +15,11 @@ def upload(request):  # FileUpload
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
             viewer(request.FILES['file'])
-            return HttpResponseRedirect('/success/url/')
-        else:
-            form = UploadFileForm()
-    return render(request, 'upload.html', {'File': File, 'form': form})
+            return HttpResponseRedirect('home') # Take it to Viewer
+    else:
+        form = UploadFileForm()
+    file = File.objects.all()
+    return render(request, 'upload.html', {'file': file, 'form': form})
 
 
 def reader(request):  # Reads the Uploaded CSV

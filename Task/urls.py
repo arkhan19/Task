@@ -26,8 +26,8 @@ urlpatterns = [
     path('', views.home, name='home'),
 
     # Viewer
-    path('', views.upload, name = 'upload'),
-    path('', views.viewer, name = 'viewer'),
+    path('upload/', views.upload, name='upload'),
+    path('viewer/', views.viewer, name='viewer'),
 ]
 
 if settings.DEBUG:
