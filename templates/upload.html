@@ -1,25 +1,34 @@
-{% extends 'base.html' %}
-    {% load static %}
-        {% block content %}
-            <form method="post" enctype="multipart/form-data">{% csrf_token %}
-                <p>{{ form.non_field_errors }}</p>
-                    <input type="file" name="myfile">
-                    <button type="submit">Upload</button>
-            {% if uploaded_file_url %}
-                <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
-            {% endif %}
-            </form>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Upload</title>
+    </head>
+    <body>
+    <div style="text-align: center;">
+    <!-- List of uploaded documents -->
+    {% if files %}
+        <ul>
+        {% for file in files %}
+            <li><a href="{{ file.file.url }}">{{ file.file.name }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No documents.</p>
+    {% endif %}
 
-            <p><a href="{% url 'home' %}">Return to home</a></p>
+        <!-- Upload form. Note enctype attribute! -->
+        <form action="{% url 'upload' %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+            <p><input type="submit" value="Upload" /></p>
+            <p>{{ form.non_field_errors }}</p>
+            <p>{{ form.file.label_tag }} </p>
+            <p>
+                {{ form.file.errors }}
+                {{ form.file }}
+            </p>
 
-            <!-- List of Files Uploaded if any -->
-            {% if files %}
-                <ul>
-                    {% for file in files %}
-                        <li><a href = "{{ file.url }}">{{ file.name }}</a></li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <p>Nothing Uploaded Yet</p>
-            {% endif %}
-        {% endblock %}
+            <p>{{ form.file.help_text }}</p>
+        </form>
+    </div>
+    </body>
+</html>

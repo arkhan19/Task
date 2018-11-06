@@ -27,7 +27,7 @@ urlpatterns = [
 
     # Viewer
     path('upload/', views.upload, name='upload'),
-    path('viewer/', views.viewer, name='viewer'),
+    # path('viewer/', views.viewer, name='view'),
 ]
 
 if settings.DEBUG:

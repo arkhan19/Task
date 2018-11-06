@@ -1,7 +1,10 @@
 from django import forms
+from .models import File
 
 
-class UploadFileForm(forms.Form):
-    title = forms.CharField(max_length=50)
-    file = forms.FileField()
+class FileForm(forms.Form):
+    file = forms.FileField(
+        label='Select a file NOW',
+        help_text='max. 2.5 megabytes'
+    )
 

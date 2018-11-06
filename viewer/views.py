@@ -1,6 +1,11 @@
-from django.shortcuts import render
+import csv
+
+from django.shortcuts import render, reverse, render_to_response
 from django.http import HttpResponseRedirect
-from .forms import UploadFileForm
+from django.contrib import messages
+from django.template import RequestContext
+# from django.views import View
+from .forms import FileForm  # used by upload function
 import pandas
 from .models import File
 # Create your views here.
@@ -12,27 +17,25 @@ def home(request):
 
 def upload(request):  # FileUpload
     if request.method == 'POST':
-        form = UploadFileForm(request.POST, request.FILES)
+        form = FileForm(request.POST, request.FILES)
         if form.is_valid():
-            viewer(request.FILES['file'])
-            return HttpResponseRedirect('home') # Take it to Viewer
+            # newfile = File(file=request.FILES['file'])
+            # newfile.save()
+            file = request.FILES['file']
+            messages.success(request, "File Upload DONE")
+
+            decoded_file = file.read().decode('utf-8').splitlines()
+            reader = csv.DictReader(decoded_file)
+            for row in reader:
+                print(row)
+
+            # Redirect to the document list after POST
+            return HttpResponseRedirect(reverse('views.home'))
     else:
-        form = UploadFileForm()
-    file = File.objects.all()
-    return render(request, 'upload.html', {'file': file, 'form': form})
+        form = FileForm()  # A empty, unbound form
 
+            # Load documents for the list page
+        files = File.objects.all()
 
-def reader(request):  # Reads the Uploaded CSV
-    table = pandas.read_csv('file.csv')
-
-
-def viewer(request):  # Renders the Uploaded CSV
-    pass
-
-
-def opcreator(request):  # Picks column names from table for options
-    pass
-
-
-def sorting(request):  # Sorting the table
-    pass
+        # Render list page with the documents and the form
+        return render_to_response('upload.html', {'files':files, 'form':form})
