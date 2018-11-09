@@ -39,14 +39,8 @@ class View(generics.RetrieveAPIView):
     renderer_classes = (TemplateHTMLRenderer,)
 
     def get(self, request, *args, **kwargs):
-        data = {'id': '1', 'first_name': 'Tyrone', 'last_name': 'Ellicott', 'email': 'tellicott0@slideshare.net',
-                'gender': 'Male', 'Credit card number': '3534248523324444', 'city': 'Zhaodong'},{'id': '2',
-                                                                                                  'first_name': 'Jarid',
-                                                                                                  'last_name': 'Lyburn',
-                                                                                                  'email': 'jlyburn1@dailymotion.com',
-                                                                                                  'gender': 'Male',
-                                                                                                  'Credit card number': '4903816866819211',
-                                                                                                'city': 'Gręboszów'}
+        r = requests.get('https://www.binance.com/api/v1/ticker/allPrices')
+        data = r.json()
         data = json.dumps(data)
         data = json.loads(data)
         type(data)
