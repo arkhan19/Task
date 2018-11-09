@@ -30,9 +30,18 @@ function CreateTableFromJSON(data) {
             }
         }
 
-        // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
-        var divContainer = document.getElementById("showData");
+        // ADD THE NEWLY CREATED TABLE WITH DATA TO CONTAINER.
+        var divContainer = document.getElementById("showTable");
         divContainer.innerHTML = "";
         divContainer.appendChild(table);
+
+
+        // ADD THE NEWLY CREATED CHECKBOX WITH TABLE HEADER TO CONTAINER
+    var $ths = $("th").map(function() {
+    return "<option>" + $.trim($(this).text()) + "</option>"
+    }).get();
+    var $select = $("select").append($ths.join(""));
+
+
     }
 
