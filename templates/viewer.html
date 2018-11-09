@@ -19,11 +19,30 @@
         }
     </style>
 {% load static %}
-<script src = "{% static '/js/json2table.js' %}" type="text/javascript"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src = "{% static '/js/json2table.js' %}" type="text/javascript"></script>
+    <script src = "{% static '/js/hidenshow.js' %}" type="text/javascript"></script>
+    <script>
+$(document).ready(function() {
+    $('input[type="checkbox"]').click(function() {
+        var index = $(this).attr('name').substr(3);
+        index--;
+        $('table tr').each(function() {
+            $('td:eq(' + index + ')',this).toggle();
+        });
+        $('th.' + $(this).attr('name')).toggle();
+    });
+});
+</script>
 </head>
 <body>
     <input type="button" onclick="CreateTableFromJSON({{ data }})" value="Create Table From JSON" />
+   <form>
+        <input type="checkbox" name="col1" checked="checked" /> Hide/Show Column 1 <br />
+        <input type="checkbox" name="col2" checked="checked" /> Hide/Show Column 2 <br />
+        <input type="checkbox" name="col3" checked="checked" /> Hide/Show Column 3 <br />
+    </form>
     <p id="showData"></p>
-    <p>{{ data }}</p>
+
 </body>
 </html>
