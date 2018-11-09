@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Viewer</title>
+    <style>
+        th, td, p, input {
+            font:14px Verdana;
+        }
+        table, th, td
+        {
+            border: solid 1px #DDD;
+            border-collapse: collapse;
+            padding: 2px 3px;
+            text-align: center;
+        }
+        th {
+            font-weight:bold;
+        }
+    </style>
+{% load static %}
+<script src = "{% static '/js/json2table.js' %}" type="text/javascript"></script>
+</head>
+<body>
+    <input type="button" onclick="CreateTableFromJSON({{ data }})" value="Create Table From JSON" />
+    <p id="showData"></p>
+    <p>{{ data }}</p>
+</body>
+</html>

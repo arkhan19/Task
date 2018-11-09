@@ -2,33 +2,32 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Upload</title>
+        <title>Minimal Django File Upload Example</title>
     </head>
-    <body>
-    <div style="text-align: center;">
-    <!-- List of uploaded documents -->
-    {% if files %}
-        <ul>
-        {% for file in files %}
-            <li><a href="{{ file.file.url }}">{{ file.file.name }}</a></li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>No documents.</p>
-    {% endif %}
 
-        <!-- Upload form. Note enctype attribute! -->
-        <form action="{% url 'upload' %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
-            <p><input type="submit" value="Upload" /></p>
+    <body>
+
+        <!-- List of uploaded documents -->
+        {% if file %}
+            <ul>
+                {% for file in file %}
+                    <li><a href="{{ file.file.url }}">{{ file.file.name }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Nothing Uploaded Yet.</p>
+        {% endif %}
+        <form action="{% url "upload" %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
             <p>{{ form.non_field_errors }}</p>
-            <p>{{ form.file.label_tag }} </p>
+            <p>{{ form.file.help_text }}</p>
             <p>
                 {{ form.file.errors }}
                 {{ form.file }}
             </p>
 
-            <p>{{ form.file.help_text }}</p>
+            <p><input type="submit" value="Upload"/></p>
         </form>
-    </div>
     </body>
+
 </html>

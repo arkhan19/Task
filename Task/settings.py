@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'viewer',
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -116,14 +117,13 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+PROJECT_ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), '..'))
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
-STATICFILES_DIRS = (os.path.join(
-    BASE_DIR, "deployment", "static"),)
-STATIC_ROOT = os.path.join(
-    os.path.dirname(BASE_DIR), "deployment", "collected_static")
-MEDIA_ROOT = os.path.join(
-    os.path.dirname(BASE_DIR), "deployment", "media")
-MEDIA_URL = '/media/'
-STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+STATIC_URL = os.environ.get('STATIC_URL', '/static/')
+
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
+MEDIA_URL = os.environ.get('MEDIA_URL', '/media/')
+
