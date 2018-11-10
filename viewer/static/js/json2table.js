@@ -36,12 +36,49 @@ function CreateTableFromJSON(data) {
         divContainer.appendChild(table);
 
 
-        // ADD THE NEWLY CREATED CHECKBOX WITH TABLE HEADER TO CONTAINER
-    var $ths = $("th").map(function() {
-    return "<option>" + $.trim($(this).text()) + "</option>"
-    }).get();
-    var $select = $("select").append($ths.join(""));
+        // ADD THE NEWLY CREATED DROPDOWN WITH TABLE HEADER TO CONTAINER
+        var $ths = $("th").map(function() {
+        return "<option>" + $.trim($(this).text()) + "</option>"
+        }).get();
+        $("select").append($ths.join(""));
 
 
+
+
+}
+
+function HideNShow() {
+
+    var $select = $("select");
+
+    //Remove based on button click
+    var $option = $select.find(":selected");
+    var selected = $option.text();
+
+    // To update the list after removal of the column
+    $option.remove();
+    if ($select.is(':empty')) {
+        $select.remove();
+        $(this).remove();
     }
+    //To Remove Entire Column Now. <<<<<<<<<<<<<
+    var $table = $('table').on("click", "th", "td", function() {
+        var $this = $(this);
+        var index = $this.index();
+        if ($this[0].tagName === "TD") {
+            $table.find("th").eq(index).remove();
+        } else {
+            $this.remove();
+        }
+        $table.find("tr").each(function () {
+            $(this).find("td").eq(index).remove();
+        });
+    });
+    $table.find("th:contains('" + selected + "')").click();
 
+
+}
+
+function rearrange(){
+
+}
