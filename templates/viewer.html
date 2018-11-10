@@ -2,7 +2,7 @@
 <html>
 <head>
 
-    <title>Viewer</title>
+    <title>TASK</title>
     <style>
         th, td, p, input {
             font:14px Verdana;
@@ -20,14 +20,19 @@
     </style>
 {% load static %}
     <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+
     <script src = "{% static '/js/json2table.js' %}" type="text/javascript"></script>
-    <script src = "{% static '/js/hidenshow.js' %}" type="text/javascript"></script>
+    <script src="{% static '/js/jquery.dragtable.js' %}"></script>
+
+
 </head>
 <body>
-    <input type="button" onclick="CreateTableFromJSON({{ data }})" value="Create Table From JSON" />
+    <input type="button" onclick="CreateTableFromJSON({{ data }})" value="Create Table" />
 
     <select></select>&nbsp;<input type="button" onclick="HideNShow()" value="Remove Selected" />
     <br/><br/>
     <p id="showTable"></p>
+
 </body>
 </html>

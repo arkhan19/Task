@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Minimal Django File Upload Example</title>
+        <title>TASK</title>
     </head>
 
     <body>
@@ -25,8 +25,9 @@
                 {{ form.file.errors }}
                 {{ form.file }}
             </p>
-
+            <p>{{ path }}</p>
             <p><input type="submit" value="Upload"/></p>
+            <div style="text-align: center;"><a href="{% url 'viewer' %}">Viewer</a> </div>
         </form>
     </body>
 

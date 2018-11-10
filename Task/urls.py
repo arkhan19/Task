@@ -29,7 +29,7 @@ urlpatterns = [
     # Viewer
     path('upload/', views.upload, name='upload'),
     path('viewer/', views.View.as_view(), name='viewer'),
-    path('view/', views.viewer, name='view'),
+    path('demo/', views.demo, name='demo'),
 ]
 
 if settings.DEBUG:
