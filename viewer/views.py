@@ -23,6 +23,7 @@ import pandas
 # Create your views here.
 # ToDo: Clean the file
 
+
 def home(request):
     return render(request, 'home.html')
 
@@ -54,7 +55,7 @@ def upload(request):
             return HttpResponseRedirect(reverse('upload'))
     else:
         form = FileForm()  # A empty, unbound form
-    obj = File.objects.get(pk=request.pk)
+    obj = File.objects.get(pk=1)
     dir = obj.file_field.path
     # Render list page with the documents and the form
     return render(request, 'upload.html', {'form': form, 'path': dir})

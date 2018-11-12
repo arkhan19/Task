@@ -19,15 +19,10 @@
         {% endif %}
         <form action="{% url "upload" %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <p>{{ form.non_field_errors }}</p>
+{#            <p>{{ form.non_field_errors }}</p>#}
             <p>{{ form.file.help_text }}</p>
-            <p>
-                {{ form.file.errors }}
-                {{ form.file }}
-            </p>
-            <p>{{ path }}</p>
             <p><input type="submit" value="Upload"/></p>
-            <div style="text-align: center;"><a href="{% url 'viewer' %}">Viewer</a> </div>
+            <div style="text-align: center;"><a href="{% url 'viewer' %}">View Your File Contents</a> </div>
         </form>
     </body>
 
