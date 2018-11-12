@@ -1,38 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-
-    <title>TASK</title>
-    <style>
-        th, td, p, input {
-            font:14px Verdana;
-        }
-        table, th, td
-        {
-            border: solid 1px #DDD;
-            border-collapse: collapse;
-            padding: 2px 3px;
-            text-align: center;
-        }
-        th {
-            font-weight:bold;
-        }
-    </style>
-{% load static %}
+{% extends 'base.html' %}
+    {% load static %}
+{%  block content %}
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
-
     <script src = "{% static '/js/json2table.js' %}" type="text/javascript"></script>
     <script src="{% static '/js/jquery.dragtable.js' %}"></script>
 
 
-</head>
-<body>
-    <input type="button" onclick="CreateTableFromJSON({{ data }})" value="Create Table" />
 
-    <select></select>&nbsp;<input type="button" onclick="HideNShow()" value="Remove Selected" />
+    <input type="button" onclick="CreateTableFromJSON({{ data }})" value="Create Table" />
+    <br>
+    <br>
+    <select></select>&nbsp;
+    <input type="button" onclick="HideNShow()" value="Remove Selected" />
     <br/><br/>
-    <p id="showTable"></p>
-    <a><a href="{% url 'home' %} ">Go Home</a></p>
-</body>
-</html>
+    <table id="showTable" class = "table table-borderless" align="center"></table>
+
+
+{% endblock %}

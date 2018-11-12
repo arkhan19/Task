@@ -18,7 +18,6 @@ from django.urls import path
 from viewer import views
 from django.conf import settings
 from django.conf.urls.static import static
-# ToDo: Clean the URLS
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,7 +28,6 @@ urlpatterns = [
     # Viewer
     path('upload/', views.upload, name='upload'),
     path('viewer/', views.View.as_view(), name='viewer'),
-    path('demo/', views.demo, name='demo'),
 ]
 
 if settings.DEBUG:

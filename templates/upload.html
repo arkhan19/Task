@@ -1,29 +1,29 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>TASK</title>
-    </head>
-
-    <body>
+{% extends 'base.html' %}
+    {% load static %}
+    {%  block content %}
 
         <!-- List of uploaded documents -->
-        {% if file %}
-            <ul>
-                {% for file in file %}
-                    <li><a href="{{ file.file.url }}">{{ file.file.name }}</a></li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>Nothing Uploaded Yet.</p>
-        {% endif %}
-        <form action="{% url "upload" %}" method="post" enctype="multipart/form-data">
+{#        {% if file %}#}
+{#            <ul>#}
+{#                {% for file in form.file %}#}
+{#                    <li><a href="{{ file.file.url }}">{{ file.file.name }}</a></li>#}
+{#                {% endfor %}#}
+{#            </ul>#}
+{#        {% else %}#}
+{#            <p>Nothing Uploaded Yet.</p>#}
+{#        {% endif %}#}
+
+        <br>
+        <br>
+        <form action="{% url "upload" %}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
 {#            <p>{{ form.non_field_errors }}</p>#}
             <p>{{ form.file.help_text }}</p>
-            <p><input type="submit" value="Upload"/></p>
-            <div style="text-align: center;"><a href="{% url 'viewer' %}">View Your File Contents</a> </div>
+            <input type="file" name="file"/>
+            <button type = "submit">Upload</button>
         </form>
-    </body>
+    <br>
+    <br>
+{#    <a href="{% url 'viewer' %}">View Your File Contents</a>#}
+    {% endblock %}
 
-</html>
